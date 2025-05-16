@@ -5,8 +5,9 @@ Command Interpreter Module for HBNB Project
 import cmd
 from models.base_model import BaseModel
 from models import storage
+from models.user import User
 
-MODELS = ["BaseModel"]
+MODELS = ["BaseModel", "User"]
 
 
 def validate_args(args_list):
@@ -53,7 +54,11 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        new_model = BaseModel()
+        if cls_name == "BaseModel":
+            new_model = BaseModel()
+        elif cls_name == "User":
+            new_model = User()
+            
         new_model.save()
         print(new_model.id)
 
