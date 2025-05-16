@@ -55,7 +55,7 @@ class TestFileStorage_methods(unittest.TestCase):
 
     def test_all_with_arg(self):
         with self.assertRaises(TypeError):
-            storage.all(None)
+            storage.all()
 
     def test_new(self):
         bm = BaseModel()
