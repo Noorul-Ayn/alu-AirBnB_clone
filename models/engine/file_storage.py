@@ -5,6 +5,11 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
+    def clear(self):
+        self.__objects = {}
+        with open(self.__file_path, "w") as f:
+            json.dump({}, f)
+    
     def all(self):
         return self.__objects
 
