@@ -48,13 +48,14 @@ class HBNBCommand(cmd.Cmd):
         """Creates an instance of a Model"""
         if not cls_name:
             print("** class name missing **")
-            return "safsfasdf"
+            return 
         if cls_name not in MODELS:
             print("** class doesn't exist **")
             return
 
         new_model = BaseModel()
         new_model.save()
+        print(new_model.id)
 
     def do_show(self, args):
         """
