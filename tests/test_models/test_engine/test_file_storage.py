@@ -25,7 +25,7 @@ class TestFileStorage_instantiation(unittest.TestCase):
         self.assertEqual(dict, type(FileStorage._FileStorage__objects))
 
     def test_storage_initializes(self):
-        self.assertEqual(type(models.storage), FileStorage)
+        self.assertEqual(type(storage), FileStorage)
 
 
 class TestFileStorage_methods(unittest.TestCase):
@@ -51,26 +51,26 @@ class TestFileStorage_methods(unittest.TestCase):
         FileStorage._FileStorage__objects = {}
 
     def test_all(self):
-        self.assertEqual(dict, type(models.storage.all()))
+        self.assertEqual(dict, type(storage.all()))
 
     def test_all_with_arg(self):
         with self.assertRaises(TypeError):
-            models.storage.all(None)
+            storage.all(None)
 
     def test_new(self):
         bm = BaseModel()
-        models.storage.new(bm)
-        self.assertIn("BaseModel." + bm.id, models.storage.all().keys())
-        self.assertIn(bm, models.storage.all().values())
+        storage.new(bm)
+        self.assertIn("BaseModel." + bm.id, storage.all().keys())
+        self.assertIn(bm, storage.all().values())
 
     def test_new_with_args(self):
         with self.assertRaises(TypeError):
-            models.storage.new(BaseModel(), 1)
+            storage.new(BaseModel(), 1)
 
     def test_save(self):
         bm = BaseModel()
-        models.storage.new(bm)
-        models.storage.save()
+        storage.new(bm)
+        storage.save()
         save_text = ""
         with open("file.json", "r") as f:
             save_text = f.read()
@@ -78,19 +78,19 @@ class TestFileStorage_methods(unittest.TestCase):
 
     def test_save_with_arg(self):
         with self.assertRaises(TypeError):
-            models.storage.save(None)
+            storage.save(None)
 
     def test_reload(self):
         bm = BaseModel()
-        models.storage.new(bm)
-        models.storage.save()
-        models.storage.reload()
+        storage.new(bm)
+        storage.save()
+        storage.reload()
         objs = FileStorage._FileStorage__objects
         self.assertIn("BaseModel." + bm.id, objs)
 
     def test_reload_with_arg(self):
         with self.assertRaises(TypeError):
-            models.storage.reload(None)
+            storage.reload(None)
 
 
 if __name__ == "__main__":
