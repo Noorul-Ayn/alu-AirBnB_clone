@@ -28,9 +28,8 @@ class BaseModel:
 
     def to_dict(self):
         return {
-            **self.__dict__, 
+            **self.__dict__,
             "__class__": self.__class__.__name__,
             "created_at": datetime.isoformat(self.created_at),
             "updated_at": datetime.isoformat(self.updated_at),
-            }
-
+        }

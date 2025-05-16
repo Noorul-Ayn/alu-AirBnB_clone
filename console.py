@@ -5,6 +5,7 @@ from models import storage
 
 MODELS = ["BaseModel"]
 
+
 def validate_args(args_list):
     if not args_list:
         print("** class name missing **")
@@ -18,8 +19,9 @@ def validate_args(args_list):
     if len(args_list) < 2:
         print("** instance id missing **")
         return False
-    
+
     return True
+
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
@@ -40,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
         if cls_name not in MODELS:
             print("** class doesn't exist **")
             return
-        
+
         new_model = BaseModel()
         new_model.save()
 
@@ -50,8 +52,7 @@ class HBNBCommand(cmd.Cmd):
 
         if not validate_args(args_list):
             return
-        
-        
+
         class_name = args_list[0]
         instance_id = args_list[1]
         key = "{}.{}".format(class_name, instance_id)
@@ -66,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
         args_list = str.split(args)
         if not validate_args(args_list):
             return
-        
+
         class_name = args_list[0]
         instance_id = args_list[1]
         objects = storage.all()
@@ -76,8 +77,6 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
         else:
             print("** no instance found **")
-        
-        
 
 
 if __name__ == "__main__":
