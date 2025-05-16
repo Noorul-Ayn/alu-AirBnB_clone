@@ -32,6 +32,10 @@ def validate_args(args_list):
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
+    def emptyline(self):
+        """Do nothing when an empty line is entered"""
+        pass
+
     def do_quit(self, args):
         """Quit command to exit the program"""
         return True
