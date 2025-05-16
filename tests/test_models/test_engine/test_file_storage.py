@@ -96,6 +96,11 @@ class TestFileStorage_methods(unittest.TestCase):
         with self.assertRaises(TypeError):
             storage.save(None)
     
+    def test_save_with_self(self):
+        """Test save method with self as argument."""
+        with self.assertRaises(TypeError):
+            storage.save(self)
+    
     def test_reload(self):
         """Test that reload properly deserializes the JSON file to __objects."""
         bm = BaseModel()
@@ -121,6 +126,9 @@ class TestFileStorage_methods(unittest.TestCase):
     
     def test_reload_with_empty_file(self):
         """Test reload with an empty file."""
+        # Clear the objects dictionary first
+        FileStorage._FileStorage__objects = {}
+        # Write empty JSON directly instead of calling save()
         with open("file.json", "w") as f:
             f.write("{}")
         storage.reload()
@@ -131,7 +139,9 @@ class TestFileStorage_methods(unittest.TestCase):
         bm = BaseModel()
         storage.new(bm)
         storage.save()
+        bm_id = bm.id
         storage._FileStorage__objects = {}
         storage.reload()
+        self.assertTrue(len(storage.all()) > 0)
         for obj in storage.all().values():
             self.assertEqual(type(obj), BaseModel)

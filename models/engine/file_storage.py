@@ -20,9 +20,12 @@ class FileStorage:
         from models.base_model import BaseModel
         try:
             with open(self.__file_path, "r") as f:
-                obj_dict = json.load(f)
-                for key, value in obj_dict.items():
-                    if value['__class__'] == 'BaseModel':
-                        self.__objects[key] = BaseModel(**value)
+                try:
+                    obj_dict = json.load(f)
+                    for key, value in obj_dict.items():
+                        if value['__class__'] == 'BaseModel':
+                            self.__objects[key] = BaseModel(**value)
+                except:
+                    pass
         except FileNotFoundError:
             pass
