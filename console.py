@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+Command Interpreter Module for HBNB Project
+"""
 import cmd
 from models.base_model import BaseModel
 from models import storage
@@ -7,6 +10,9 @@ MODELS = ["BaseModel"]
 
 
 def validate_args(args_list):
+    """
+    Validates command arguments to ensure they meet requirements.
+    """
     if not args_list:
         print("** class name missing **")
         return False
