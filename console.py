@@ -47,7 +47,10 @@ class HBNBCommand(cmd.Cmd):
         new_model.save()
 
     def do_show(self, args):
-        """Prints the string representation of an instance\nUse: show <class name> <id>"""
+        """
+        Prints the string representation of an instance
+        Use: show <class name> <id>
+        """
         args_list = str.split(args)
 
         if not validate_args(args_list):
