@@ -48,7 +48,7 @@ class HBNBCommand(cmd.Cmd):
         """Creates an instance of a Model"""
         if not cls_name:
             print("** class name missing **")
-            return
+            return "safsfasdf"
         if cls_name not in MODELS:
             print("** class doesn't exist **")
             return
