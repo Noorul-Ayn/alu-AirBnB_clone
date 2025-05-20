@@ -1,21 +1,12 @@
 #!/usr/bin/python3
 """Defines unnittests for models/state.py."""
 import unittest
-from datetime import datetime
 from models.base_model import BaseModel
 from models.state import State
 
 
 class TestState(unittest.TestCase):
     """Unittests for testing the State class."""
-
-    # def test_attributes(self):
-    #     """Check for attributes."""
-    #     st = State(name="a")
-    #     self.assertEqual(str, type(st.id))
-    #     self.assertEqual(datetime, type(st.created_at))
-    #     self.assertEqual(datetime, type(st.updated_at))
-    #     self.assertTrue(hasattr(st, "name"))
 
     def test_is_subclass(self):
         """Check that State is a subclass of BaseModel."""
