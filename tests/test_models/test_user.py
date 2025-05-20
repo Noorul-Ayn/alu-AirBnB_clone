@@ -21,16 +21,15 @@ class TestUser_instantiation(unittest.TestCase):
         
 
     def test_attributes(self):
-        us = User()
-        us.first_name = "Mohamed"
-        us.last_name = "Dahab"
-        us.email = "m.dahab@alustudent.com"
-        us.password = "12345"
+        User.first_name = "Mohamed"
+        User.last_name = "Dahab"
+        User.email = "m.dahab@alustudent.com"
+        User.password = "12345"
         
-        self.assertEqual(us.first_name, "Mohamed")
-        self.assertEqual(us.last_name, "Dahab")
-        self.assertEqual(us.email, "m.dahab@alustudent.com")
-        self.assertEqual(us.password, "12345")
+        self.assertEqual(User.first_name, "Mohamed")
+        self.assertEqual(User.last_name, "Dahab")
+        self.assertEqual(User.email, "m.dahab@alustudent.com")
+        self.assertEqual(User.password, "12345")
 
 
 # class TestUser_save(unittest.TestCase):
