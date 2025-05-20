@@ -9,7 +9,7 @@ class FileStorage:
         self.__objects = {}
         with open(self.__file_path, "w") as f:
             json.dump({}, f)
-    
+
     def all(self):
         return self.__objects
 
@@ -30,7 +30,7 @@ class FileStorage:
         from models.place import Place
         from models.review import Review
         from models.state import State
-        
+
         classes = {
             'BaseModel': BaseModel,
             'User': User,
@@ -43,12 +43,10 @@ class FileStorage:
 
         try:
             with open(self.__file_path, "r") as f:
-                try:
-                    obj_dict = json.load(f)
-                    for key, value in obj_dict.items():
-                        if value['__class__'] in classes:
-                            self.__objects[key] = classes[value['__class__']](**value)
-                except:
-                    pass
+                obj_dict = json.load(f)
+                for key, value in obj_dict.items():
+                    if value['__class__'] in classes:
+                        self.__objects[key] = classes[value['__class__']](
+                            **value)
         except FileNotFoundError:
             pass

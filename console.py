@@ -118,7 +118,8 @@ class HBNBCommand(cmd.Cmd):
         if not cls:
             for obj in objects.values():
                 obj_list.append(str(obj))
-        # If class name is provided and valid, print only instances of that class
+        # If class name is provided and valid, print only
+        # instances of that class
         elif cls in MODELS:
             for key, obj in objects.items():
                 if key.split(".")[0] == cls:
