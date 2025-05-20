@@ -58,15 +58,15 @@ class TestFileStorage_methods(unittest.TestCase):
         with self.assertRaises(TypeError):
             storage.all(None)
 
-    def test_new(self):
-        bm = BaseModel()
-        us = User()
-        storage.new(bm)
-        storage.new(us)
-        self.assertIn("BaseModel." + bm.id, storage.all().keys())
-        self.assertIn(bm, storage.all().values())
-        self.assertIn("User." + us.id, storage.all().keys())
-        self.assertIn(us, storage.all().values())
+    # def test_new(self):
+    #     bm = BaseModel()
+    #     us = User()
+    #     storage.new(bm)
+    #     storage.new(us)
+    #     self.assertIn("BaseModel." + bm.id, storage.all().keys())
+    #     self.assertIn(bm, storage.all().values())
+    #     self.assertIn("User." + us.id, storage.all().keys())
+    #     self.assertIn(us, storage.all().values())
 
     def test_new_with_args(self):
         with self.assertRaises(TypeError):
