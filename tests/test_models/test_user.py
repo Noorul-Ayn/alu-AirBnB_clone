@@ -86,6 +86,36 @@ class TestUser(unittest.TestCase):
         user.email = "test@example.com"
         self.assertEqual(user.email, "test@example.com")
 
+    def test_password(self):
+        """Test that User has attr password, and it's an empty string"""
+        user = User()
+        self.assertTrue(hasattr(user, "password"))
+        self.assertEqual(user.password, "")
+        
+        # Test password assignment
+        user.password = "12345"
+        self.assertEqual(user.password, "12345")
+
+    def test_first_name(self):
+        """Test that User has attr first_name, and it's an empty string"""
+        user = User()
+        self.assertTrue(hasattr(user, "first_name"))
+        self.assertEqual(user.first_name, "")
+        
+        # Test first_name assignment
+        user.first_name = "Mohamed"
+        self.assertEqual(user.first_name, "Mohamed")
+
+    def test_last_name(self):
+        """Test that User has attr last_name, and it's an empty string"""
+        user = User()
+        self.assertTrue(hasattr(user, "last_name"))
+        self.assertEqual(user.last_name, "")
+        
+        # Test last_name assignment
+        user.last_name = "Dahab"
+        self.assertEqual(user.last_name, "Dahab")
+
 
 
 
