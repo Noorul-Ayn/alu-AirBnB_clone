@@ -58,15 +58,15 @@ class TestFileStorage_methods(unittest.TestCase):
         with self.assertRaises(TypeError):
             storage.all(None)
 
-    # def test_new(self):
-    #     bm = BaseModel()
-    #     us = User()
-    #     storage.new(bm)
-    #     storage.new(us)
-    #     self.assertIn("BaseModel." + bm.id, storage.all().keys())
-    #     self.assertIn(bm, storage.all().values())
-    #     self.assertIn("User." + us.id, storage.all().keys())
-    #     self.assertIn(us, storage.all().values())
+    def test_new(self):
+        bm = BaseModel()
+        us = User()
+        storage.new(bm)
+        storage.new(us)
+        self.assertIn("BaseModel." + bm.id, storage.all().keys())
+        self.assertIn(bm, storage.all().values())
+        self.assertIn("User." + us.id, storage.all().keys())
+        self.assertIn(us, storage.all().values())
 
     def test_new_with_args(self):
         with self.assertRaises(TypeError):
@@ -84,10 +84,6 @@ class TestFileStorage_methods(unittest.TestCase):
             self.assertIn("BaseModel." + bm.id, save_text)
             self.assertIn("User." + us.id, save_text)
 
-    def test_save_with_arg(self):
-        with self.assertRaises(TypeError):
-            storage.save(None)
-
     def test_reload(self):
         bm = BaseModel()
         us = User()
@@ -98,6 +94,10 @@ class TestFileStorage_methods(unittest.TestCase):
         objs = FileStorage._FileStorage__objects
         self.assertIn("BaseModel." + bm.id, objs)
         self.assertIn("User." + us.id, objs)
+
+    def test_save_with_arg(self):
+        with self.assertRaises(TypeError):
+            storage.save(None)
 
     def test_reload_with_arg(self):
         with self.assertRaises(TypeError):
