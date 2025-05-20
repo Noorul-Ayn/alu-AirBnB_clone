@@ -13,6 +13,9 @@ class BaseModel:
                     setattr(self, key, datetime.fromisoformat(kwargs[key]))
                 else:
                     setattr(self, key, kwargs[key])
+            self.id = str(uuid.uuid4()) if not hasattr(self, "id") else self.id
+            self.created_at = datetime.now() if not hasattr(self, "created_at") else self.created_at
+            self.updated_at = datetime.now() if not hasattr(self, "updated_at") else self.updated_at
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
