@@ -75,6 +75,16 @@ class TestUser(unittest.TestCase):
         st = User("1", id="5", created_at=dt.isoformat())
         self.assertEqual(st.id, "5")
         self.assertEqual(st.created_at, dt)
+    
+    def test_email(self):
+        """Test that User has attr email, and it's an empty string"""
+        user = User()
+        self.assertTrue(hasattr(user, "email"))
+        self.assertEqual(user.email, "")
+        
+        # Test email assignment
+        user.email = "test@example.com"
+        self.assertEqual(user.email, "test@example.com")
 
 
 
