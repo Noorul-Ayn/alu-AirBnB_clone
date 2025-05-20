@@ -6,8 +6,21 @@ import cmd
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
 
-MODELS = ["BaseModel", "User"]
+MODELS = {
+    "BaseModel": BaseModel,
+    "User": User,
+    "City": City,
+    "Place": Place,
+    "Review": Review,
+    "State": State,
+    "Amenity": Amenity,
+}
 
 
 def validate_args(args_list):
@@ -49,16 +62,12 @@ class HBNBCommand(cmd.Cmd):
         """Creates an instance of a Model"""
         if not cls_name:
             print("** class name missing **")
-            return 
+            return
         if cls_name not in MODELS:
             print("** class doesn't exist **")
             return
 
-        if cls_name == "BaseModel":
-            new_model = BaseModel()
-        elif cls_name == "User":
-            new_model = User()
-            
+        new_model = MODELS[cls_name]()
         new_model.save()
         print(new_model.id)
 
@@ -104,7 +113,7 @@ class HBNBCommand(cmd.Cmd):
         """
         objects = storage.all()
         obj_list = []
-        
+
         # If no class name is provided, print all instances
         if not cls:
             for obj in objects.values():
@@ -112,12 +121,12 @@ class HBNBCommand(cmd.Cmd):
         # If class name is provided and valid, print only instances of that class
         elif cls in MODELS:
             for key, obj in objects.items():
-                if key.split('.')[0] == cls:
+                if key.split(".")[0] == cls:
                     obj_list.append(str(obj))
         else:
             print("** class doesn't exist **")
             return
-            
+
         print(obj_list)
 
     def do_update(self, args):
@@ -127,44 +136,44 @@ class HBNBCommand(cmd.Cmd):
         Usage: update <class name> <id> <attribute name> "<attribute value>"
         """
         args_list = args.split()
-        
+
         # Validate class name and id
         if not validate_args(args_list):
             return
-        
+
         # Check if attribute name is provided
         if len(args_list) < 3:
             print("** attribute name missing **")
             return
-            
+
         # Check if attribute value is provided
         if len(args_list) < 4:
             print("** value missing **")
             return
-            
+
         class_name = args_list[0]
         instance_id = args_list[1]
         attr_name = args_list[2]
-        
+
         # Handle the case where attribute value might contain spaces
         # Join the remaining args as the attribute value
-        attr_value = args.split(' ', 3)[3]
-        
+        attr_value = args.split(" ", 3)[3]
+
         # Remove quotes if present
         if attr_value.startswith('"') and attr_value.endswith('"'):
             attr_value = attr_value[1:-1]
-            
+
         # Skip update for protected attributes
-        if attr_name in ['id', 'created_at', 'updated_at']:
+        if attr_name in ["id", "created_at", "updated_at"]:
             return
-            
+
         # Find the instance and update it
         key = "{}.{}".format(class_name, instance_id)
         objects = storage.all()
-        
+
         if key in objects:
             instance = objects[key]
-            
+
             # Try to cast the value to the appropriate type
             try:
                 # First try to convert to int or float if possible
@@ -176,11 +185,11 @@ class HBNBCommand(cmd.Cmd):
                     except ValueError:
                         # Keep it as string if conversion fails
                         pass
-                
+
                 # Update the instance attribute
                 setattr(instance, attr_name, attr_value)
                 instance.save()
-                
+
             except Exception as e:
                 print(f"Error updating attribute: {e}")
         else:
