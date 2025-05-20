@@ -10,7 +10,7 @@ from time import sleep
 from models.user import User
 from models.base_model import BaseModel
 
-class TestUser_instantiation(unittest.TestCase):
+class TestUser(unittest.TestCase):
     """Unittests for testing instantiation of the User class."""
 
     def test_no_args_instantiates(self):
